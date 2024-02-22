@@ -1,0 +1,13 @@
+.formStyle{
+    padding: 16px;
+    width: 320px;
+    height: 160px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+}
+
+.formInput{
+    display: block;
+    margin-bottom: 16px;
+}
