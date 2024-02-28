@@ -6,32 +6,37 @@ import { ContactList } from './ContactList/ContactList';
 
 import css from './App.module.css';
 
-const STORAGE_KEY = 'contacts';
 
-const initialContacts = [
-  { id: 'id-1', name: 'Harper Rodriguez', number: '459-12-56' },
-  { id: 'id-2', name: 'Mia Chen', number: '443-89-12' },
-  { id: 'id-3', name: 'Donovan Patel', number: '645-17-79' },
-  { id: 'id-4', name: 'Isabella Santiago', number: '227-91-26' },
-];
+// const initialContacts = [
+//   { id: 'id-1', name: 'Harper Rodriguez', number: '459-12-56' },
+//   { id: 'id-2', name: 'Mia Chen', number: '443-89-12' },
+//   { id: 'id-3', name: 'Donovan Patel', number: '645-17-79' },
+//   { id: 'id-4', name: 'Isabella Santiago', number: '227-91-26' },
+// ];
 
 export class App extends Component {
   state = {
-    contacts: [],
+    contacts: [
+      { id: 'id-1', name: 'Beyoncé', number: '342-12-44' },
+      { id: 'id-2', name: 'Drake', number: '440-22-78' },
+      { id: 'id-3', name: 'Taylor Swift', number: '897-11-20' },
+      { id: 'id-4', name: 'Shawn Mendes', number: '284-91-51' },
+    ],
     filter: '',
   };
 
-  componentDidMount() {
-    const storageValue = localStorage.getItem(STORAGE_KEY);
+   componentDidMount() {
+    const contacts = localStorage.getItem('contacts');
+    const parsedContacts = JSON.parse(contacts);
 
-    this.setState({
-      contacts: storageValue ? JSON.parse(storageValue) : initialContacts,
-    });
+    if (parsedContacts) {
+      this.setState({ contacts: parsedContacts });
+    }
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(_, prevState) {
     if (this.state.contacts !== prevState.contacts) {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(this.state.contacts));
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
     }
   }
 
